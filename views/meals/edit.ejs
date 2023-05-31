@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<form action="/meals" method="POST">
+    <label>Food:</label>
+    <input type="text" name="food" value="<%=meal.food%> ">
+    <label>Calories:</label>
+    <input type="number" name="calories" value="<%=meal.calories%> ">
+    <label>Carbs:</label>
+    <input type="number" name="carbs" value="<%=meal.carbs%> ">
+    <label>Protein:</label>
+    <input type="number" name="protein" value="<%=meal.protein%> ">
+    <label>Fat:</label>
+    <input type="number" name="fat" value="<%=meal.fat%> ">
+    <input type="submit" value="Add Meal">
+
+
+</form>
+
+
+<%- include('../partials/footer') %>

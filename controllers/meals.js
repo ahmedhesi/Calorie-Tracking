@@ -6,7 +6,9 @@ module.exports = {
     new: newMeal,
     show,
     create,
-    deleteMeal,
+    delete: deleteMeal,
+    edit,
+    update,
 };
 
 async function show(req, res) {
@@ -38,9 +40,32 @@ async function create(req, res) {
 
   async function deleteMeal(req, res) {
     await Meal.findOneAndDelete(
-      {_id: req.params.id, userRecommending: req.user._id}
+      {_id: req.params.id, user: req.user._id}
     );
     res.redirect('/meals');
+  }
+
+  async function edit(req, res) {
+    const meal = await Meal.findOne({_id: req.params.id, user: req.user._id});
+    console.log(meal)
+    if (!meal) return res.redirect('/meals');
+    res.render('meals/edit', { meal });
+  }
+
+  async function update(req, res) {
+    try {
+      const updatedBook = await Book.findOneAndUpdate(
+        {_id: req.params.id, userRecommending: req.user._id},
+        // update object with updated properties
+        req.body,
+        // options object {new: true} returns updated doc
+        {new: true}
+      );
+      return res.redirect(`/books/${updatedBook._id}`);
+    } catch (e) {
+      console.log(e.message);
+      return res.redirect('/books');
+    }
   }
 
 

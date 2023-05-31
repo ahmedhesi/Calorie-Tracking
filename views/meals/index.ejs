@@ -12,7 +12,14 @@
 <% meals.forEach(function(m) {%>
     <tr>
         <td><%= m.food %></td>
-        <td><a href="/meals/<%= m._id %>">DETAILS</a></td> <button>DELETE</button>
+        <td>
+          <a href="/meals/<%= m._id %>">DETAILS</a>
+        </td>
+       <td>
+        <form action="/meals/<%= m._id %>?_method=DELETE" method="POST">
+          <button type="submit">DELETE</button>
+        </form>
+      </td>
     </tr>
     <% }); %>
 </tbody>
