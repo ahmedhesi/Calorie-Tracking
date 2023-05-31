@@ -6,12 +6,12 @@ module.exports = {
     new: newMeal,
     show,
     create,
+    deleteMeal,
 };
 
 async function show(req, res) {
-    const meal = await Meal.findById(req.params.id).populate('');
-    const performers = await Performer.find({ _id: { $nin: meal.food } }).sort('name');
-    res.render('meals/show', { title: 'Meal Detail', meal, performers });
+    const meal = await Meal.findById(req.params.id);
+    res.render('meals/show', { title: 'Meal Detail', meal });
   }
 
 async function index(req, res) {
@@ -24,13 +24,23 @@ function newMeal(req, res) {
   }
 
 async function create(req, res) {
+  req.body.user = req.user._id;
+  req.body.userName = req.user.name;
+  req.body.userAvatar = req.user.avatar;
     try {
       await Meal.create(req.body); 
-      res.redirect(`/meal`);
+      res.redirect(`/meals`);
     } catch (err) {
       console.log(err);
       res.render('meals/new', { errorMsg: err.message });
     }
+  }
+
+  async function deleteMeal(req, res) {
+    await Meal.findOneAndDelete(
+      {_id: req.params.id, userRecommending: req.user._id}
+    );
+    res.redirect('/meals');
   }
 
 

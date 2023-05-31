@@ -12,7 +12,7 @@
 <% meals.forEach(function(m) {%>
     <tr>
         <td><%= m.food %></td>
-        <a href="/meals/<%= m._id %>">DETAILS</a>
+        <td><a href="/meals/<%= m._id %>">DETAILS</a></td> <button>DELETE</button>
     </tr>
     <% }); %>
 </tbody>

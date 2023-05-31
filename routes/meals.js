@@ -9,5 +9,6 @@ router.get('/', mealsCtrl.index);
 router.get('/new', ensureLoggedIn, mealsCtrl.new)
 router.post('/', ensureLoggedIn, mealsCtrl.create);
 router.get('/:id', mealsCtrl.show);
+router.delete('/:id', mealsCtrl.delete)
 
 module.exports = router;
