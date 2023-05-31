@@ -54,17 +54,17 @@ async function create(req, res) {
 
   async function update(req, res) {
     try {
-      const updatedBook = await Book.findOneAndUpdate(
-        {_id: req.params.id, userRecommending: req.user._id},
+      const updatedMeal = await Meal.findOneAndUpdate(
+        {_id: req.params.id, user: req.user._id},
         // update object with updated properties
         req.body,
         // options object {new: true} returns updated doc
         {new: true}
       );
-      return res.redirect(`/books/${updatedBook._id}`);
+      return res.redirect(`/meals/${updatedMeal._id}`);
     } catch (e) {
       console.log(e.message);
-      return res.redirect('/books');
+      return res.redirect('/meals');
     }
   }
 
