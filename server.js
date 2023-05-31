@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var passport = require('passport');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy; 
 var methodOverride = require('method-override');
 
 require('dotenv').config();
@@ -13,7 +14,8 @@ require('./config/passport');
 
 
 var indexRouter = require('./routes/index');
-var mealsRouter = require('./routes/meals')
+var usersRouter = require('./routes/users');
+var mealsRouter = require('./routes/meals');
 var app = express();
 
 // view engine setup
@@ -42,9 +44,10 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+app.use(methodOverride('_method'));
 
 app.use('/', indexRouter);
+app.use('/users', usersRouter);
 app.use('/meals', mealsRouter);
 
 // catch 404 and forward to error handler

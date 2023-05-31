@@ -37,7 +37,7 @@ const mealSchema = new Schema({
         type: Number,
         required: true
      },
-     protien: {
+     protein: {
         type: Number,
         required: true
      },
