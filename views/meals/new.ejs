@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<form action="/meals" method="POST">
+    <label>Food:</label>
+    <input type="text" name="food">
+    <label>Calories:</label>
+    <input type="number" name="calories">
+    <label>Carbs:</label>
+    <input type="number" name="carbs">
+    <label>Protien:</label>
+    <input type="number" name="protein">
+    <label>Fat:</label>
+    <input type="number" name="fat">
+    <input type="submit" value="Add Meal">
+
+
+</form>
+
+
+<%- include('../partials/footer') %>

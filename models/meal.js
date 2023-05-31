@@ -34,15 +34,15 @@ const mealSchema = new Schema({
         required: true
      },
      carbs: {
-        type: String,
+        type: Number,
         required: true
      },
      protien: {
-        type: String,
+        type: Number,
         required: true
      },
      fat: {
-        type: String,
+        type: Number,
         required: true
      },
      reviews: [reviewSchema],
