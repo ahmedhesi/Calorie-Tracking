@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-
+<nav class="d-flex flex-column mb-3">
     <div>Food: </div>
     <div>
         <%= meal.food %>
@@ -21,6 +21,7 @@
     <div>
         <%= meal.fat %>
     </div>
+    </nav>
     <a href="/meals/<%= meal._id %>/edit">EDIT</a>
 
     <form action="/meals/<%= meal._id %>/reviews" method="POST">
