@@ -9,6 +9,8 @@ module.exports = {
     delete: deleteMeal,
     edit,
     update,
+    createReviewComment,
+    deleteReview,
 };
 
 async function show(req, res) {
@@ -68,7 +70,34 @@ async function create(req, res) {
     }
   }
 
+  async function createReviewComment(req, res) {
+    const meal = await Meal.findById(req.params.id);
 
+    // Add the user-centric info to req.body (the new review)
+    req.body.user = req.user._id;
+    req.body.userName = req.user.name;
+    req.body.userAvatar = req.user.avatar;
 
+    meal.reviews.push(req.body);
+    try {
+        await meal.save();
+    } catch (err) {
+        console.log(err);
+    }
+    res.redirect(`/meals/${meal._id}`)
+}
+
+async function deleteReview(req, res) {
+    // Note the cool "dot" syntax to query on the property of a subdoc
+    const meal = await Meal.findOne({ 'reviews._id': req.params.id, 'reviews.user': req.user._id });
+    // Rogue user!
+    if (!meal) return res.redirect('/meals');
+    // Remove the review using the remove method available on Mongoose arrays
+    meal.reviews.remove(req.params.id);
+    // Save the updated movie doc
+    await meal.save();
+    // Redirect back to the movie's show view
+    res.redirect(`/meals/${meal._id}`);
+  }
 
 

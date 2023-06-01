@@ -12,5 +12,7 @@ router.get('/:id', mealsCtrl.show);
 router.delete('/:id', ensureLoggedIn, mealsCtrl.delete)
 router.get('/:id/edit', ensureLoggedIn, mealsCtrl.edit)
 router.put('/:id', ensureLoggedIn, mealsCtrl.update)
+router.post('/:id/reviews', ensureLoggedIn, mealsCtrl.createReviewComment)
+router.delete('/reviews/:id', ensureLoggedIn, mealsCtrl.deleteReview)
 
 module.exports = router;
