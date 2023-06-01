@@ -1,63 +1,84 @@
 <%- include('../partials/header') %>
 
-<section id="show-page">
+
     <div>Food: </div>
-    <div><%= meal.food %></div>
+    <div>
+        <%= meal.food %>
+    </div>
     <div>Calories: </div>
-    <div><%= meal.calories %></div>
+    <div>
+        <%= meal.calories %>
+    </div>
     <div>Carbs: </div>
-    <div><%= meal.carbs %></div>
+    <div>
+        <%= meal.carbs %>
+    </div>
     <div>Protein: </div>
-    <div><%= meal.protein %></div>
+    <div>
+        <%= meal.protein %>
+    </div>
     <div>Fat: </div>
-    <div><%= meal.fat %></div>
-   <a href="/meals/<%= meal._id %>/edit">EDIT</a>
-   
- <form action="/meals/<%= meal._id %>/reviews" method="POST">
-    <input type="text" name="content">
-    <input type="number" name="rating" min="1" max="5">
-    <button type="submit">ADD REVIEW</button>
-  </form>
+    <div>
+        <%= meal.fat %>
+    </div>
+    <a href="/meals/<%= meal._id %>/edit">EDIT</a>
 
-  <% if (meal.reviews.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Date</th>
-          <th>Review</th>
-          <th>Rating</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% let total = 0 %>
-        <% meal.reviews.forEach(function(r) { %>
-          <% total += r.rating %>
-          <tr>
-            <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" ><%= r.userName %></td>
-            <td><%= r.createdAt.toLocaleDateString() %></td>
-            <td><%= r.content %></td>
-            <td><%= r.rating %></td>
-            <td>
-              <% if (user?._id.equals(r.user)) { %>
-                <form action="/meals/reviews/<%= r._id %>?_method=DELETE" method="POST">
-                  <button type="submit">X</button>
-                </form>
-              <% } %>
-            </td>
-          </tr>
-        <% }); %>
-        <tr>
-        <td colspan="3"></td>
-        <td><strong><%= (total / meal.reviews.length).toFixed(1) %></strong></td>
-      </tr>
-    </tbody>
-  </table>
-<% } else { %>
-  <h5>No Reviews Yet</h5>
-<% } %>
+    <form action="/meals/<%= meal._id %>/reviews" method="POST">
+        <input type="text" name="content">
+        <input type="number" name="rating" min="1" max="5">
+        <button type="submit">ADD REVIEW</button>
+    </form>
+
+    <% if (meal.reviews.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Review</th>
+                    <th>Rating</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let total=0 %>
+                    <% meal.reviews.forEach(function(r) { %>
+                        <% total +=r.rating %>
+                            <tr>
+                                <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %>"
+                                        referrerpolicy="no-referrer">
+                                    <%= r.userName %>
+                                </td>
+                                <td>
+                                    <%= r.createdAt.toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= r.content %>
+                                </td>
+                                <td>
+                                    <%= r.rating %>
+                                </td>
+                                <td>
+                                    <% if (user?._id.equals(r.user)) { %>
+                                        <form action="/meals/reviews/<%= r._id %>?_method=DELETE" method="POST">
+                                            <button type="submit">X</button>
+                                        </form>
+                                        <% } %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td><strong>
+                                            <%= (total / meal.reviews.length).toFixed(1) %>
+                                        </strong></td>
+                                </tr>
+
+                                <% } else { %>
+                                    <h5>No Reviews Yet</h5>
+                                    <% } %>
 
 
-
-<%- include('../partials/footer') %>
+            </tbody>
+        </table>
+        <%- include('../partials/footer') %>

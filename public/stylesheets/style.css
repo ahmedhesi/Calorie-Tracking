@@ -17,5 +17,17 @@ a {
   height: 30px;
 }
 
+.container {
+  background-color: white;
+}
+
+.container2 {
+  background-color: orange;
+}
+
+.foodlabel {
+  background-color: blue;
+  color: black;
+}
 
 

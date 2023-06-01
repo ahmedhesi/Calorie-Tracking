@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-
+<nav class=".flex-column" >
 <form action="/meals" method="POST">
     <label>Food:</label>
     <input type="text" name="food">
@@ -12,9 +12,10 @@
     <label>Fat:</label>
     <input type="number" name="fat">
     <input type="submit" value="Add Meal">
-
+</nav>
 
 </form>
 
 
 <%- include('../partials/footer') %>
+
