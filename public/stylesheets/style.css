@@ -30,4 +30,23 @@ a {
   color: black;
 }
 
+#show {
+  color: blue;
+  border: 2px solid black;
+  margin-top: 5px;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  color: yellow;
+}
+
+
+
+
+
+
 
